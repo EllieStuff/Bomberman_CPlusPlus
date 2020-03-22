@@ -1,5 +1,6 @@
 #pragma once
 #include "Types.h"
+#include "InputManager.h"
 #include <iostream>
 
 struct Player {
@@ -16,8 +17,11 @@ public:
 	Player(const Vec2 &_pos, const int &_id);
 	Player(const Player &p);
 
+	void InitPos(const Vec2 &_pos);
 
 	void AddScore(const int &scoreAdded);
+
+	void Move(const Inputs &input);
 
 	void PrintScore();
 	void PrintPlayer();

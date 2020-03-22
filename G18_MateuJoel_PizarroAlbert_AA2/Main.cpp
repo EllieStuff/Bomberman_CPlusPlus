@@ -1,23 +1,32 @@
 //Main.cpp
 #include "InputManager.h"
 #include "Player.h"
+#include "Map.h"
 #include "Constants.h"
+#include <Windows.h>
 
 
 int main() {
 	InputManager inputManager;
-	int playerCount = 0;
-	Player p1({ 0, 0 }, playerCount);
-	playerCount++;
-	Player p2({ 1, 1 }, playerCount);
-	playerCount++;
+	Player player1, player2;
+	Map map;
+	map.ReadConfigTXT(player1, player2);
 
-	p1.PrintPlayer();
-	p2.PrintPlayer();
+	//player1.PrintPlayer();
+	//player2.PrintPlayer();
 
 	bool gameOver = false;
 	while (!gameOver) {
+		//Inputs
+		inputManager.Update();
 
+		//Update
+		map.Refresh(player1, player2, inputManager);
+
+		//Draw
+		map.PrintMap();
+		Sleep(1000);
+		system("cls");
 
 
 	}

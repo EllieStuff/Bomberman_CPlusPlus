@@ -2,20 +2,50 @@
 
 Player::Player(const Vec2 & _pos, const int & _id)
 {
-	initialPos = pos = _pos;
+	InitPos(_pos);
 	id = _id;
 }
 
 Player::Player(const Player & p)
 {
-	initialPos = pos = p.pos;
+	InitPos(p.pos);
 	score = p.score;
 	id = p.id;
+}
+
+void Player::InitPos(const Vec2 & _pos)
+{
+	initialPos = pos = _pos;
 }
 
 void Player::AddScore(const int & scoreAdded)
 {
 	score += scoreAdded;
+}
+
+void Player::Move(const Inputs & input)
+{
+	switch (input)
+	{
+	case Inputs::UP_1: case Inputs::UP_2:
+		pos.y--;
+		break;
+
+	case Inputs::DOWN_1: case Inputs::DOWN_2:
+		pos.y++;
+		break;
+
+	case Inputs::LEFT_1: case Inputs::LEFT_2:
+		pos.x--;
+		break;
+
+	case Inputs::RIGHT_1: case Inputs::RIGHT_2:
+		pos.x++;
+		break;
+
+	default:;
+
+	}
 }
 
 void Player::PrintScore()
