@@ -1,0 +1,18 @@
+15,17
+XXXXXXXXXXXXXXXXX
+X1        ***   X
+X X X X X*X*X*X*X
+X ***    ***  **X
+X X X X X X*X X*X
+X  ***   ***  **X
+X X X*X X X*X X X
+X    * *** ***  X
+X X X*X X X X X X
+X    *** **  ***X
+X X X X X X*X X*X
+X   ****  **  * X
+X X X X X X X X X
+X              2X
+XXXXXXXXXXXXXXXXX
+
+
