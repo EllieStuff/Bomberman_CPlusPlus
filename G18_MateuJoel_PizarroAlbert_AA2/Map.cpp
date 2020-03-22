@@ -4,7 +4,7 @@
 #include <Windows.h>
 
 
-void Map::ReadConfigTXT(Player1 &player1, Player2 &player2)
+void Map::ReadConfigTXT(Player &player1, Player &player2)
 {
 	char aux;
 	int j;

@@ -1,5 +1,6 @@
 #pragma once
-#include "Types.h"
+#include "Constants.h"
+#include "Player.h"
 
 struct Map
 {
@@ -9,7 +10,7 @@ struct Map
 	int numRows, numColumns;
 
 	//Methods
-	void ReadConfigTXT(Player1 &player1, Player2 &player2);
+	void ReadConfigTXT(Player &player1, Player &player2);
 
 	void PrintMap() const;
 };
