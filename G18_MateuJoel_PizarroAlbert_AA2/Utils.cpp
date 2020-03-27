@@ -2,6 +2,7 @@
 
 void Utils::PrintScores(const int & p1Score, const int & p2Score)
 {
+	std::cout << std::endl;
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 96);
 	std::cout << "*------SCORE------*";
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);

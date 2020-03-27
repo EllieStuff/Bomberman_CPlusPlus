@@ -29,13 +29,13 @@ void Map::ReadConfigTXT(Player &player1, Player &player2)
 				if (aux == static_cast<char>(Cell::PLAYER1))
 				{
 					//setPos Player1
-					player1 = Player({ i, j }, playerCount);
+					player1 = Player({ j, i }, playerCount);
 					playerCount++;
 				}
 				else if (aux == static_cast<char>(Cell::PLAYER2))
 				{
 					//setPos Player2
-					player2 = Player({ i, j }, playerCount);
+					player2 = Player({ j, i }, playerCount);
 					playerCount++;
 				}
 
@@ -101,19 +101,19 @@ bool Map::MoveAvailable(Player player, const Inputs &input)
 	{
 	case Inputs::UP_1: case Inputs::UP_2:
 		player.pos.y--;
-		return map[player.pos.x][player.pos.y] == Cell::NONE && player.pos.x >= 0;
+		return map[player.pos.y][player.pos.x] == Cell::NONE && player.pos.x >= 0;
 
 	case Inputs::DOWN_1: case Inputs::DOWN_2:
 		player.pos.y++;
-		return map[player.pos.x][player.pos.y] == Cell::NONE && player.pos.x < numRows;
+		return map[player.pos.y][player.pos.x] == Cell::NONE && player.pos.x < numColumns;
 
 	case Inputs::LEFT_1: case Inputs::LEFT_2:
 		player.pos.x--;
-		return map[player.pos.x][player.pos.y] == Cell::NONE && player.pos.x >= 0;
+		return map[player.pos.y][player.pos.x] == Cell::NONE && player.pos.x >= 0;
 
 	case Inputs::RIGHT_1: case Inputs::RIGHT_2:
 		player.pos.x++;
-		return map[player.pos.x][player.pos.y] == Cell::NONE && player.pos.x < numColumns;
+		return map[player.pos.y][player.pos.x] == Cell::NONE && player.pos.x < numRows;
 
 	default:
 		return false;
