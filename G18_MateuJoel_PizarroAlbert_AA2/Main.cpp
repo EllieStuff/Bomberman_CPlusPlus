@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Map.h"
 #include "Constants.h"
+#include "Utils.h"
 #include <Windows.h>
 
 
@@ -26,6 +27,8 @@ int main() {
 
 		//Draw
 		map.PrintMap();
+		Utils::PrintScores(player1.score, player2.score);
+
 		Sleep(1000);
 		system("cls");
 

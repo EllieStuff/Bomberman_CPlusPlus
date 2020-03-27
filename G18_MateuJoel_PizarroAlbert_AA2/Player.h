@@ -6,11 +6,11 @@
 struct Player {
 private:
 	Vec2 initialPos;
-	int score = 0;
 
 public:
 	Vec2 pos;
 	int id = 0;
+	int score = 0;
 	//int bombs = 0;
 
 	Player() {};
@@ -23,7 +23,6 @@ public:
 
 	void Move(const Inputs &input);
 
-	void PrintScore();
-	void PrintPlayer();
+	//void PrintPlayer();
 
 };

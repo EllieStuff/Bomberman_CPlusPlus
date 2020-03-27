@@ -48,14 +48,10 @@ void Player::Move(const Inputs & input)
 	}
 }
 
-void Player::PrintScore()
-{
-	std::cout << "Player " << id + 1 << " score: " << score << std::endl;
-}
 
-void Player::PrintPlayer()
-{
-	std::cout << "Player " << id + 1
-		<< ":\nPosition: (" << pos.x << ", " << pos.y
-		<< ")\nScore: " << score << std::endl;
-}
+//void Player::PrintPlayer()
+//{
+//	std::cout << "Player " << id + 1
+//		<< ":\nPosition: (" << pos.x << ", " << pos.y
+//		<< ")\nScore: " << score << std::endl;
+//}

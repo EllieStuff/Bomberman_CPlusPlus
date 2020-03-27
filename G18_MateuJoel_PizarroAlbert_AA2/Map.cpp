@@ -11,13 +11,14 @@ void Map::ReadConfigTXT(Player &player1, Player &player2)
 	std::ifstream file("config.txt");
 	if (file.is_open())
 	{
+		file >> std::noskipws;
 		file >> numRows;
 		file >> aux;
 		file >> numColumns;
 		file >> aux;
-		file >> std::noskipws;
 		map = new Cell *[numColumns];
 		int playerCount = 0;
+
 		for (int i = 0; i < numColumns; i++)
 		{
 			map[i] = new Cell[numRows];
@@ -62,9 +63,9 @@ void Map::Refresh(Player & player1, Player & player2, InputManager inputManager)
 			case InputOrigin::PLAYER_1:
 				if (!hasReadP1) {
 					if (MoveAvailable(player1, input)) {
-						map[player1.pos.x][player1.pos.y] = Cell::NONE;
+						map[player1.pos.y][player1.pos.x] = Cell::NONE;
 						player1.Move(input);
-						map[player1.pos.x][player1.pos.y] = Cell::PLAYER1;
+						map[player1.pos.y][player1.pos.x] = Cell::PLAYER1;
 					}
 					hasReadP1 = true;
 				}
@@ -73,9 +74,9 @@ void Map::Refresh(Player & player1, Player & player2, InputManager inputManager)
 			case InputOrigin::PLAYER_2:
 				if (!hasReadP2) {
 					if (MoveAvailable(player2, input)) {
-						map[player2.pos.x][player2.pos.y] = Cell::NONE;
+						map[player2.pos.y][player2.pos.x] = Cell::NONE;
 						player2.Move(input);
-						map[player2.pos.x][player2.pos.y] = Cell::PLAYER2;
+						map[player2.pos.y][player2.pos.x] = Cell::PLAYER2;
 					}
 					hasReadP2 = true;
 				}
@@ -123,30 +124,34 @@ bool Map::MoveAvailable(Player player, const Inputs &input)
 
 void Map::PrintMap() const
 {
-	for (int i = 0; i < numColumns; i++)
+	for (int i = 0; i < numRows; i++)
 	{
-		for (int j = 0; j < numRows; j++)
+		for (int j = 0; j < numColumns; j++)
 		{
-			switch (map[j][i])
+			switch (map[i][j])
 			{
 				case Cell::BLOCK:
 					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 136);
-					std::cout << static_cast<char>(map[j][i]) << static_cast<char>(map[j][i]);
+					std::cout << static_cast<char>(map[i][j]) << static_cast<char>(map[i][j]);
 					break;
 				case Cell::WALL:
 					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 119);
-					std::cout << static_cast<char>(map[j][i]) << static_cast<char>(map[j][i]);
+					std::cout << static_cast<char>(map[i][j]) << static_cast<char>(map[i][j]);
 					break;
 				case Cell::PLAYER1:
 					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 34);
-					std::cout << static_cast<char>(map[j][i]) << ' ';
+					std::cout << static_cast<char>(map[i][j]) << ' ';
 					break;
 				case Cell::PLAYER2:
 					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 85);
-					std::cout << static_cast<char>(map[j][i]) << ' ';
+					std::cout << static_cast<char>(map[i][j]) << ' ';
+					break;
+				case Cell::NONE:
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+					std::cout << static_cast<char>(map[i][j]) << ' ';
 					break;
 				default:
-					std::cout << ' ' << static_cast<char>(map[j][i]);
+					//std::cout << static_cast<char>(map[i][j]) << '!';
 					break;
 			}
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
