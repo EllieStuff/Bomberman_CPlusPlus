@@ -16,14 +16,14 @@ void Map::ReadConfigTXT(Player &player1, Player &player2)
 		file >> numColumns;
 		file >> aux;
 		file >> std::noskipws;
-		map = new Cell *[numRows];
+		map = new Cell *[numColumns];
 		int playerCount = 0;
-		for (int i = 0; i < numRows; i++)
+		for (int i = 0; i < numColumns; i++)
 		{
-			map[i] = new Cell[numColumns];
+			map[i] = new Cell[numRows];
+			file >> aux;
 			j = 0;
-			do {
-				file >> aux;
+			while (aux != '\n') {
 				map[i][j] = static_cast<Cell>(aux);
 				if (aux == static_cast<char>(Cell::PLAYER1))
 				{
@@ -37,8 +37,10 @@ void Map::ReadConfigTXT(Player &player1, Player &player2)
 					player2 = Player({ i, j }, playerCount);
 					playerCount++;
 				}
+
+				file >> aux;
 				j++;
-			} while (aux != '\n');
+			} 
 		}
 		file.close();
 	}

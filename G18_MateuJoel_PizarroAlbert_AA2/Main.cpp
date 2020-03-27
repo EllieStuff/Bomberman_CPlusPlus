@@ -22,6 +22,7 @@ int main() {
 
 		//Update
 		map.Refresh(player1, player2, inputManager);
+		if (inputManager.GetKey(Inputs::ESC)) gameOver = true;
 
 		//Draw
 		map.PrintMap();
