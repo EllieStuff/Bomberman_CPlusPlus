@@ -97,6 +97,7 @@ void Map::Refresh(Player & player1, Player & player2, InputManager inputManager)
 
 bool Map::MoveAvailable(Player player, const Inputs &input)
 {
+	//Check whether movement is available
 	switch (input)
 	{
 	case Inputs::UP_1: case Inputs::UP_2:
@@ -131,7 +132,7 @@ void Map::PrintMap() const
 			switch (map[i][j])
 			{
 				case Cell::BLOCK:
-					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 136);
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 136);				//Console colors
 					std::cout << static_cast<char>(map[i][j]) << static_cast<char>(map[i][j]);
 					break;
 				case Cell::WALL:

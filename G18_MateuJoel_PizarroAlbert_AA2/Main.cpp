@@ -28,7 +28,8 @@ int main() {
 		//Draw
 		map.PrintMap();
 		Utils::PrintScores(player1.score, player2.score);
-
+		
+		//Wait 1 second
 		Sleep(1000);
 		system("cls");
 
