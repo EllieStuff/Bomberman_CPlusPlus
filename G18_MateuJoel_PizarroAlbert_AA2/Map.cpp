@@ -16,12 +16,15 @@ void Map::ReadConfigTXT(Player &player1, Player &player2)
 		file >> aux;
 		file >> numColumns;
 		file >> aux;
-		map = new Cell *[numColumns];
+		//map = new Cell *[numColumns];
+		map = std::vector<std::vector<Cell>>(numRows);
+
 		int playerCount = 0;
 
-		for (int i = 0; i < numColumns; i++)
+		for (int i = 0; i < numRows; i++)
 		{
-			map[i] = new Cell[numRows];
+			//map[i] = new Cell[numRows];
+			map[i] = std::vector<Cell>(numColumns);
 			file >> aux;
 			j = 0;
 			while (aux != '\n') {
@@ -41,6 +44,7 @@ void Map::ReadConfigTXT(Player &player1, Player &player2)
 
 				file >> aux;
 				j++;
+				
 			} 
 		}
 		file.close();
