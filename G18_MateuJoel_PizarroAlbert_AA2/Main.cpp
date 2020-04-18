@@ -5,31 +5,87 @@
 #include "Constants.h"
 #include "Utils.h"
 #include <Windows.h>
+#include <time.h>
+
 
 
 int main() {
 	InputManager inputManager;
 	Player player1, player2;
 	Map map;
-	map.ReadConfigTXT(player1, player2);
+
+	clock_t timeEnd, timeLeft;
 
 	//player1.PrintPlayer();
 	//player2.PrintPlayer();
 
-	bool gameOver = false;
-	while (!gameOver) {
-		//Inputs
-		inputManager.Update();
+	GameState gameState = GameState::INIT;
+	while (gameState != GameState::GAME_OVER) {
+		switch (gameState)
+		{
+		case GameState::INIT:
+			map.ReadConfigTXT(player1, player2);
 
-		//Update
-		map.Refresh(player1, player2, inputManager);
-		if (inputManager.GetKey(Inputs::ESC)) gameOver = true;
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+			std::cout << "-*-*-INIT-*-*-\nPress the Spacebar to start the game. ";
+			while (gameState == GameState::INIT) {
+				inputManager.Update();
 
-		//Draw
-		map.PrintMap();
-		Utils::PrintScores(player1.score, player2.score);
-		
-		//Wait 1 second
+				if (inputManager.GetKey(Inputs::SPACE_BAR))
+					gameState = GameState::PLAY;
+				else if (inputManager.GetKey(Inputs::ESC))
+					gameState = GameState::GAME_OVER;
+			}
+
+			timeEnd = clock() + PLAY_TIME;
+			break;
+
+		case GameState::PLAY:
+			//Inputs
+			inputManager.Update();
+
+			//Update
+			map.Refresh(player1, player2, inputManager);
+			if (inputManager.GetKey(Inputs::PAUSE)) {
+				//Fer gestió de les variables necessaries (recordar parar temps a tot)
+				gameState = GameState::PAUSE;
+			}
+			else if (inputManager.GetKey(Inputs::ESC) || timeEnd < clock()) gameState = GameState::GAME_OVER;
+			
+			timeLeft = timeEnd - clock();
+
+			//Draw
+			Utils::PrintUI(player1.lives, player2.lives, timeLeft, false);
+			map.PrintMap();
+			Utils::PrintScores(player1.score, player2.score);
+
+			break;
+
+		case GameState::PAUSE:
+			Utils::PrintUI(player1.lives, player2.lives, timeLeft, true);
+			map.PrintMap();
+			Utils::PrintScores(player1.score, player2.score);
+
+			while (gameState == GameState::PAUSE) {
+				inputManager.Update();
+
+				if (inputManager.GetKey(Inputs::SPACE_BAR))
+					gameState = GameState::PLAY;
+				else if (inputManager.GetKey(Inputs::ESC))
+					gameState = GameState::GAME_OVER;
+			}
+
+			timeEnd = clock() + timeLeft;
+
+			break;
+
+		case GameState::GAME_OVER:
+			break;
+
+		default:;
+
+		}
+
 		Sleep(1000);
 		system("cls");
 

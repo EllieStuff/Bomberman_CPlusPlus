@@ -11,6 +11,7 @@ public:
 	Vec2 pos;
 	int id = 0;
 	int score = 0;
+	int lives = 3;
 	//int bombs = 0;
 
 	Player() {};
