@@ -127,6 +127,33 @@ bool Map::MoveAvailable(Player player, const Inputs &input)
 
 }
 
+bool Map::CollisionWithExplosion(Player player, const Inputs &input)
+{
+	switch (input)
+	{
+	case Inputs::UP_1: case Inputs::UP_2:
+		player.pos.y--;
+		return map[player.pos.y][player.pos.x] != Cell::EXPLOSION;
+
+	case Inputs::DOWN_1: case Inputs::DOWN_2:
+		player.pos.y++;
+		return map[player.pos.y][player.pos.x] != Cell::EXPLOSION;
+
+	case Inputs::LEFT_1: case Inputs::LEFT_2:
+		player.pos.x--;
+		return map[player.pos.y][player.pos.x] != Cell::EXPLOSION;
+
+	case Inputs::RIGHT_1: case Inputs::RIGHT_2:
+		player.pos.x++;
+		return map[player.pos.y][player.pos.x] != Cell::EXPLOSION;
+
+	default:
+		return false;
+
+	}
+
+}
+
 void Map::PrintMap() const
 {
 	for (int i = 0; i < numRows; i++)

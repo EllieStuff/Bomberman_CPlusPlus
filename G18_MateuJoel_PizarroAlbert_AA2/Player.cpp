@@ -5,6 +5,7 @@ Player::Player(const Vec2 & _pos, const int & _id)
 	InitPos(_pos);
 	id = _id;
 	lives = 3;
+	hit = false;
 }
 
 Player::Player(const Player & p)
@@ -13,6 +14,7 @@ Player::Player(const Player & p)
 	score = p.score;
 	id = p.id;
 	lives = p.lives;
+	hit = p.hit;
 }
 
 void Player::InitPos(const Vec2 & _pos)

@@ -12,6 +12,7 @@ public:
 	int id = 0;
 	int score = 0;
 	int lives = 3;
+	bool hit;
 	//int bombs = 0;
 
 	Player() {};

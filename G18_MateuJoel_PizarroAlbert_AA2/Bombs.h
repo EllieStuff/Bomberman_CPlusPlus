@@ -15,7 +15,7 @@ public:
 	clock_t startTime;
 
 	//Methods
-	void IsExploding(Map &map);
+	void IsExploding(Map &map, Player player1, Player player2);
 
 	void SetBombs(Player player);
 };

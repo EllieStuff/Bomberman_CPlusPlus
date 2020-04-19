@@ -9,16 +9,18 @@ class Map
 	//Private att
 	//Cell **map;
 private:
-	std::vector<std::vector<Cell>> map;
 	int numRows, numColumns;
 
 public:
+	std::vector<std::vector<Cell>> map;
 	//Methods
 	void ReadConfigTXT(Player &player1, Player &player2);
 
 	void Refresh(Player &player1, Player &player2, InputManager inputManager);
 
 	bool MoveAvailable(Player player, const Inputs &input);
+
+	bool CollisionWithExplosion(Player player, const Inputs &input);
 
 	void PrintMap() const;
 };
