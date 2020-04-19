@@ -19,7 +19,7 @@ void Map::ReadConfigTXT(Player &player1, Player &player2)
 		//map = new Cell *[numColumns];
 		map = std::vector<std::vector<Cell>>(numRows);
 
-		int playerCount = 0;
+		int playerCount = 1;
 
 		for (int i = 0; i < numRows; i++)
 		{
@@ -127,31 +127,19 @@ bool Map::MoveAvailable(Player player, const Inputs &input)
 
 }
 
-bool Map::CollisionWithExplosion(Player player, const Inputs &input)
+bool Map::CollisionWithExplosion(Player &player)
 {
-	switch (input)
+	if (map[player.pos.y][player.pos.x] != Cell::EXPLOSION)
+		return true;
+	else
 	{
-	case Inputs::UP_1: case Inputs::UP_2:
-		player.pos.y--;
-		return map[player.pos.y][player.pos.x] != Cell::EXPLOSION;
-
-	case Inputs::DOWN_1: case Inputs::DOWN_2:
-		player.pos.y++;
-		return map[player.pos.y][player.pos.x] != Cell::EXPLOSION;
-
-	case Inputs::LEFT_1: case Inputs::LEFT_2:
-		player.pos.x--;
-		return map[player.pos.y][player.pos.x] != Cell::EXPLOSION;
-
-	case Inputs::RIGHT_1: case Inputs::RIGHT_2:
-		player.pos.x++;
-		return map[player.pos.y][player.pos.x] != Cell::EXPLOSION;
-
-	default:
-		return false;
-
+		player.hit = true;
+		player.lives--;
+		/*if (player.lives <= 0)
+			player.ReinitPos();
+			GAMEOVER;
+		*/
 	}
-
 }
 
 void Map::PrintMap() const

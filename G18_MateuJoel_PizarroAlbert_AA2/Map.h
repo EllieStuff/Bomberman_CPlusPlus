@@ -20,7 +20,7 @@ public:
 
 	bool MoveAvailable(Player player, const Inputs &input);
 
-	bool CollisionWithExplosion(Player player, const Inputs &input);
+	bool CollisionWithExplosion(Player &player);
 
 	void PrintMap() const;
 };

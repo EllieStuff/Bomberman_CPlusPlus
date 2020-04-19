@@ -9,13 +9,17 @@ class Bombs
 private:
 	bool hasExploded;
 	bool isSet;
+	clock_t startTime;
+	int playerID;
 
 public:
 	Vec2 position;
-	clock_t startTime;
-
+	//Constructor
+	Bombs(const int &_id);
 	//Methods
-	void IsExploding(Map &map, Player player1, Player player2);
+	void IsExploding(Map &map, int &_score);
+
+	void EndedExplosion(Map &map);
 
 	void SetBombs(Player player);
 };

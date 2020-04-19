@@ -2,6 +2,7 @@
 #include "Types.h"
 #include "InputManager.h"
 #include <iostream>
+#include "Bombs.h"
 
 struct Player {
 private:
@@ -13,7 +14,7 @@ public:
 	int score = 0;
 	int lives = 3;
 	bool hit;
-	//int bombs = 0;
+	Bombs bomb;
 
 	Player() {};
 	Player(const Vec2 &_pos, const int &_id);
