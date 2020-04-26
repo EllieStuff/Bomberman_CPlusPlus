@@ -34,60 +34,7 @@ void Bombs::IsExploding(std::vector<std::vector<Cell>> &map, int &_score)
 				}
 				map[position.x][position.y - i] = Cell::EXPLOSION;
 			}
-#pragma region cosasNasisUtilizables
-			//Cosas de colisiones del player 
-			/////PLAYER COLLISION WITH BOMB
-			/////UP
-			//if (position.y - i == player1.pos.y && position.x == player1.pos.x)	//player1 hit by bomb	//no se me ocurre como hacer modo no cutre eso
-			//{
-			//	player1.hit = true;
-			//	player1.lives--;
-			//}
-			//if (position.y - i == player2.pos.y && position.x == player2.pos.x)	//player2 hit by bomb
-			//{
-			//	player2.hit = true;
-			//	player2.lives--;
-			//}
-			//
-			/////DOWN
-			//if (position.y + i == player1.pos.y && position.x == player1.pos.x)
-			//{
-			//	player1.hit = true;
-			//	player1.lives--;
-			//}
-			//if (position.y + i == player2.pos.y && position.x == player2.pos.x)
-			//{
-			//	player2.hit = true;
-			//	player2.lives--;
-			//}
 
-			/////LEFT 
-			//if (position.x - i == player1.pos.x && position.y == player1.pos.y)
-			//{
-			//	player1.hit = true;
-			//	player1.lives--;
-			//}
-			//if (position.x - i == player2.pos.x && position.y == player2.pos.y)
-			//{
-			//	player2.hit = true;
-			//	player2.lives--;
-			//}
-
-			/////RIGHT 
-			//if (position.x + i == player1.pos.x && position.y == player1.pos.y)
-			//{
-			//	player1.hit = true;
-			//	player1.lives--;
-			//}
-			//if (position.x + i == player2.pos.x && position.y == player2.pos.y)
-			//{
-			//	player2.hit = true;
-			//	player2.lives--;
-			//}
-
-			/////BLOCK COLLISION WITH BOMB
-			//if ()								//Misma funcion que hitsWalls del pacman???
-#pragma endregion
 		}
 		///DOWN CELLS
 		for (int i = 1; i <= BOMB_RANGE; i++)
