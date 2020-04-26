@@ -70,12 +70,12 @@ void Map::Refresh(Player & player1, Player & player2, InputManager inputManager)
 
 	if (player1.bomb.isSet)
 	{
-		map[player1.bomb.position.y][player1.bomb.position.x] == Cell::BOMB;
+		map[player1.bomb.position.y][player1.bomb.position.x] = Cell::BOMB;
 		player1.bomb.IsExploding(map, player1.score);
 	}
 	if (player2.bomb.isSet)
 	{
-		map[player2.bomb.position.y][player2.bomb.position.x] == Cell::BOMB;
+		map[player2.bomb.position.y][player2.bomb.position.x] = Cell::BOMB;
 		player2.bomb.IsExploding(map, player2.score);
 	}
 
@@ -131,7 +131,7 @@ void Map::Refresh(Player & player1, Player & player2, InputManager inputManager)
 
 bool Map::MoveAvailable(Player player, InputManager inputManager)
 {
-	//Checks wheter a movement is available
+	//Checks whether a movement is available
 	if (player.id == 1) {
 		if (inputManager.GetKey(Inputs::UP_1)) {
 			player.pos.y--;

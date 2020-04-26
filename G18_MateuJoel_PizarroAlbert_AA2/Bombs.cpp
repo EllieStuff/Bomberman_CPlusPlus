@@ -169,4 +169,7 @@ void Bombs::EndedExplosion(std::vector<std::vector<Cell>> &map)
 			break;
 		}
 	}
+	///CENTER CELL
+	if (map[position.y][position.x] == Cell::BOMB)
+		map[position.y][position.x] = Cell::NONE;
 }
