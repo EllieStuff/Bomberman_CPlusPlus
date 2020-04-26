@@ -56,7 +56,31 @@ void Map::ReadConfigTXT(Player &player1, Player &player2)
 
 void Map::Refresh(Player & player1, Player & player2, InputManager inputManager)
 {
-	bool *inputs = inputManager.GetKeys();
+
+	if (MoveAvailable(player1, inputManager)) {
+		map[player1.pos.y][player1.pos.x] = Cell::NONE;
+		player1.Move(inputManager);
+		map[player1.pos.y][player1.pos.x] = Cell::PLAYER1;
+	}
+	if (MoveAvailable(player2, inputManager)) {
+		map[player2.pos.y][player2.pos.x] = Cell::NONE;
+		player2.Move(inputManager);
+		map[player2.pos.y][player2.pos.x] = Cell::PLAYER2;
+	}
+
+	if (player1.bomb.isSet)
+	{
+		map[player1.bomb.position.y][player1.bomb.position.x] == Cell::BOMB;
+		player1.bomb.IsExploding(map, player1.score);
+	}
+	if (player2.bomb.isSet)
+	{
+		map[player2.bomb.position.y][player2.bomb.position.x] == Cell::BOMB;
+		player2.bomb.IsExploding(map, player2.score);
+	}
+
+
+	/*bool *inputs = inputManager.GetKeys();
 	bool hasReadP1, hasReadP2 = hasReadP1 = false;
 	if (player1.bomb.isSet)
 	{
@@ -101,36 +125,57 @@ void Map::Refresh(Player & player1, Player & player2, InputManager inputManager)
 			}
 
 		}
-	}
+	}*/
 }
 
 
-bool Map::MoveAvailable(Player player, const Inputs &input)
+bool Map::MoveAvailable(Player player, InputManager inputManager)
 {
-	//Check whether movement is available
-	switch (input)
-	{
-	case Inputs::UP_1: case Inputs::UP_2:
-		player.pos.y--;
-		return map[player.pos.y][player.pos.x] == Cell::NONE && player.pos.x >= 0;
-
-	case Inputs::DOWN_1: case Inputs::DOWN_2:
-		player.pos.y++;
-		return map[player.pos.y][player.pos.x] == Cell::NONE && player.pos.x < numColumns;
-
-	case Inputs::LEFT_1: case Inputs::LEFT_2:
-		player.pos.x--;
-		return map[player.pos.y][player.pos.x] == Cell::NONE && player.pos.x >= 0;
-
-	case Inputs::RIGHT_1: case Inputs::RIGHT_2:
-		player.pos.x++;
-		return map[player.pos.y][player.pos.x] == Cell::NONE && player.pos.x < numRows;
-
-	default:
-		return false;
-
+	//Checks wheter a movement is available
+	if (player.id == 1) {
+		if (inputManager.GetKey(Inputs::UP_1)) {
+			player.pos.y--;
+			return map[player.pos.y][player.pos.x] == Cell::NONE && player.pos.x >= 0;
+		}
+		else if (inputManager.GetKey(Inputs::DOWN_1)) {
+			player.pos.y++;
+			return map[player.pos.y][player.pos.x] == Cell::NONE && player.pos.x < numColumns;
+		}
+		else if (inputManager.GetKey(Inputs::LEFT_1)) {
+			player.pos.x--;
+			return map[player.pos.y][player.pos.x] == Cell::NONE && player.pos.x >= 0;
+		}
+		else if (inputManager.GetKey(Inputs::RIGHT_1)) {
+			player.pos.x++;
+			return map[player.pos.y][player.pos.x] == Cell::NONE && player.pos.x < numRows;
+		}
+		else if (inputManager.GetKey(Inputs::BOMB_1)) {
+			return true;
+		}
+	}
+	else if (player.id == 2) {
+		if (inputManager.GetKey(Inputs::UP_2)) {
+			player.pos.y--;
+			return map[player.pos.y][player.pos.x] == Cell::NONE && player.pos.x >= 0;
+		}
+		else if (inputManager.GetKey(Inputs::DOWN_2)) {
+			player.pos.y++;
+			return map[player.pos.y][player.pos.x] == Cell::NONE && player.pos.x < numColumns;
+		}
+		else if (inputManager.GetKey(Inputs::LEFT_2)) {
+			player.pos.x--;
+			return map[player.pos.y][player.pos.x] == Cell::NONE && player.pos.x >= 0;
+		}
+		else if (inputManager.GetKey(Inputs::RIGHT_2)) {
+			player.pos.x++;
+			return map[player.pos.y][player.pos.x] == Cell::NONE && player.pos.x < numRows;
+		}
+		else if (inputManager.GetKey(Inputs::BOMB_2)) {
+			return true;
+		}
 	}
 
+	return false;
 }
 
 bool Map::CollisionWithExplosion(Player &player)

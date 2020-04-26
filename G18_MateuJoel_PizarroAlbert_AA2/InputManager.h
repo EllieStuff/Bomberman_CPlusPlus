@@ -16,14 +16,14 @@ public:
 
 	void Update();
 
-	bool* GetKeys();
+	//bool* GetKeys();
 
 	bool GetKey(const Inputs &key);
 
-	bool WaitForInput(const Inputs &key);
+	/*bool WaitForInput(const Inputs &key);
 
 	Inputs WaitForAnswer();
 
-	InputOrigin GetInputOrigin(Inputs input);
+	InputOrigin GetInputOrigin(Inputs input);*/
 
 };

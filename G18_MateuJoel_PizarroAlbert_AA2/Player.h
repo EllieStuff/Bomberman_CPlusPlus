@@ -22,7 +22,7 @@ public:
 
 	void AddScore(const int &scoreAdded);
 
-	void Move(const Inputs &input);
+	void Move(InputManager inputManager);
 
 	void PutBomb();
 

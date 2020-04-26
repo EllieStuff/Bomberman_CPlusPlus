@@ -4,6 +4,7 @@ Player::Player(const Vec2 & _pos, const int & _id)
 {
 	InitPos(_pos);
 	id = _id;
+	bomb.SetId(_id);
 	lives = 3;
 	hit = false;
 }
@@ -13,6 +14,7 @@ Player::Player(const Player & p)
 	InitPos(p.pos);
 	score = p.score;
 	id = p.id;
+	bomb.SetId(p.id);
 	lives = p.lives;
 	hit = p.hit;
 }
@@ -27,37 +29,52 @@ void Player::AddScore(const int & scoreAdded)
 	score += scoreAdded;
 }
 
-void Player::Move(const Inputs & input)
+void Player::Move(InputManager inputManager)
 {
-	switch (input)
-	{
-	case Inputs::UP_1: case Inputs::UP_2:
-		pos.y--;
-		break;
-
-	case Inputs::DOWN_1: case Inputs::DOWN_2:
-		pos.y++;
-		break;
-
-	case Inputs::LEFT_1: case Inputs::LEFT_2:
-		pos.x--;
-		break;
-
-	case Inputs::RIGHT_1: case Inputs::RIGHT_2:
-		pos.x++;
-		break;
-	case Inputs::BOMB_1: case Inputs::BOMB_2:
-		PutBomb();
-		break;
-	default:;
-
+	if (id == 1) {
+		if (inputManager.GetKey(Inputs::UP_1)) {
+			pos.y--;
+		}
+		else if (inputManager.GetKey(Inputs::DOWN_1)) {
+			pos.y++;
+		}
+		else if (inputManager.GetKey(Inputs::LEFT_1)) {
+			pos.x--;
+		}
+		else if (inputManager.GetKey(Inputs::RIGHT_1)) {
+			pos.x++;
+		}
+		else if (inputManager.GetKey(Inputs::BOMB_1)) {
+			PutBomb();
+		}
 	}
+	else if (id == 2) {
+		if (inputManager.GetKey(Inputs::UP_2)) {
+			pos.y--;
+		}
+		else if (inputManager.GetKey(Inputs::DOWN_2)) {
+			pos.y++;
+		}
+		else if (inputManager.GetKey(Inputs::LEFT_2)) {
+			pos.x--;
+		}
+		else if (inputManager.GetKey(Inputs::RIGHT_2)) {
+			pos.x++;
+		}
+		else if (inputManager.GetKey(Inputs::BOMB_2)) {
+			PutBomb();
+		}
+	}
+
 }
 
 void Player::PutBomb()
 {
 	if (!bomb.isSet)
 	{
+		if(id == 2){
+			id = 2;
+		}
 		bomb.SetBombs(pos);
 	}
 }

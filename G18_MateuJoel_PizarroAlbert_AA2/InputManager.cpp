@@ -17,11 +17,11 @@ void InputManager::Update()
 
 }
 
-bool * InputManager::GetKeys()
-{
-
-	return inputs;
-}
+//bool * InputManager::GetKeys()
+//{
+//
+//	return inputs;
+//}
 
 bool InputManager::GetKey(const Inputs & key)
 {
@@ -29,42 +29,42 @@ bool InputManager::GetKey(const Inputs & key)
 	return inputs[static_cast<int>(key)];
 }
 
-bool InputManager::WaitForInput(const Inputs & key)
-{
-	while (true) {
-		Update();
-
-		if (GetKey(key)) return true;
-	}
-}
-
-Inputs InputManager::WaitForAnswer()
-{
-	while (true) {
-		Update();
-		for (int i = 0; i < static_cast<int>(Inputs::COUNT); i++) {
-			if (inputs[i] == true) return static_cast<Inputs>(i);
-
-		}
-	}
-
-}
-
-InputOrigin InputManager::GetInputOrigin(Inputs input)
-{
-	//enum class Inputs { UP_1, DOWN_1, RIGHT_1, LEFT_1, BOMB_1, UP_2, DOWN_2, RIGHT_2, LEFT_2, BOMB_2, ESC, YES, NO, COUNT };
-	switch (input) {
-	case Inputs::UP_1: case Inputs::DOWN_1: case Inputs::RIGHT_1: case Inputs::LEFT_1: case Inputs::BOMB_1:
-		return InputOrigin::PLAYER_1;
-
-	case Inputs::UP_2: case Inputs::DOWN_2: case Inputs::RIGHT_2: case Inputs::LEFT_2: case Inputs::BOMB_2:
-		return InputOrigin::PLAYER_2;
-
-	case Inputs::ESC: case Inputs::PAUSE: case Inputs::SPACE_BAR:
-		return InputOrigin::ALL;
-
-	default:
-		return InputOrigin::NONE;
-
-	}
-}
+//bool InputManager::WaitForInput(const Inputs & key)
+//{
+//	while (true) {
+//		Update();
+//
+//		if (GetKey(key)) return true;
+//	}
+//}
+//
+//Inputs InputManager::WaitForAnswer()
+//{
+//	while (true) {
+//		Update();
+//		for (int i = 0; i < static_cast<int>(Inputs::COUNT); i++) {
+//			if (inputs[i] == true) return static_cast<Inputs>(i);
+//
+//		}
+//	}
+//
+//}
+//
+//InputOrigin InputManager::GetInputOrigin(Inputs input)
+//{
+//	//enum class Inputs { UP_1, DOWN_1, RIGHT_1, LEFT_1, BOMB_1, UP_2, DOWN_2, RIGHT_2, LEFT_2, BOMB_2, ESC, YES, NO, COUNT };
+//	switch (input) {
+//	case Inputs::UP_1: case Inputs::DOWN_1: case Inputs::RIGHT_1: case Inputs::LEFT_1: case Inputs::BOMB_1:
+//		return InputOrigin::PLAYER_1;
+//
+//	case Inputs::UP_2: case Inputs::DOWN_2: case Inputs::RIGHT_2: case Inputs::LEFT_2: case Inputs::BOMB_2:
+//		return InputOrigin::PLAYER_2;
+//
+//	case Inputs::ESC: case Inputs::PAUSE: case Inputs::SPACE_BAR:
+//		return InputOrigin::ALL;
+//
+//	default:
+//		return InputOrigin::NONE;
+//
+//	}
+//}

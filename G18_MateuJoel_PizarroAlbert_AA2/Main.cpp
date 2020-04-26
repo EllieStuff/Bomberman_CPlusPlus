@@ -81,7 +81,7 @@ int main() {
 
 		}
 
-		Sleep(1000);
+		Sleep(500);
 		system("cls");
 
 

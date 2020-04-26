@@ -19,7 +19,7 @@ public:
 
 	void Refresh(Player &player1, Player &player2, InputManager inputManager);
 
-	bool MoveAvailable(Player player, const Inputs &input);
+	bool MoveAvailable(Player player, InputManager inputManager);
 
 	bool CollisionWithExplosion(Player &player);
 
