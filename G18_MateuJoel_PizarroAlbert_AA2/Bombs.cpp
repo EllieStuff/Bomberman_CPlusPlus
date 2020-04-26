@@ -5,7 +5,7 @@ Bombs::Bombs(const int &_id)
 	playerID = _id;
 }
 
-void Bombs::IsExploding(Map &map, int &_score)
+void Bombs::IsExploding(std::vector<std::vector<Cell>> &map, int &_score)
 {
 	if (clock() - startTime >= BOMB_TIMER && hasExploded == false)
 	{
@@ -14,25 +14,25 @@ void Bombs::IsExploding(Map &map, int &_score)
 		///UP CELLS
 		for (int i = 1; i <= BOMB_RANGE; i++)
 		{
-			if (map.map[position.x][position.y - i] != Cell::WALL)
+			if (map[position.x][position.y - i] != Cell::WALL)
 			{
-				if (playerID == 1 && map.map[position.x][position.y - i] == Cell::PLAYER2)
+				if (playerID == 1 && map[position.x][position.y - i] == Cell::PLAYER2)
 				{
 					_score += KILL_PLAYER_SCORE;
 				}
-				else if (playerID == 1 && map.map[position.x][position.y - i] == Cell::BLOCK)
+				else if (playerID == 1 && map[position.x][position.y - i] == Cell::BLOCK)
 				{
 					_score += DESTROY_BLOCK_SCORE;
 				}
-				else if (playerID == 2 && map.map[position.x][position.y - i] == Cell::PLAYER1)
+				else if (playerID == 2 && map[position.x][position.y - i] == Cell::PLAYER1)
 				{
 					_score += KILL_PLAYER_SCORE;
 				}
-				else if (playerID == 2 && map.map[position.x][position.y - i] == Cell::BLOCK)
+				else if (playerID == 2 && map[position.x][position.y - i] == Cell::BLOCK)
 				{
 					_score += DESTROY_BLOCK_SCORE;
 				}
-				map.map[position.x][position.y - i] = Cell::EXPLOSION;
+				map[position.x][position.y - i] = Cell::EXPLOSION;
 			}
 #pragma region cosasNasisUtilizables
 			//Cosas de colisiones del player 
@@ -92,73 +92,73 @@ void Bombs::IsExploding(Map &map, int &_score)
 		///DOWN CELLS
 		for (int i = 1; i <= BOMB_RANGE; i++)
 		{
-			if (map.map[position.x][position.y + i] != Cell::WALL)
+			if (map[position.x][position.y + i] != Cell::WALL)
 			{
-				if (playerID == 1 && map.map[position.x][position.y + i] == Cell::PLAYER2)
+				if (playerID == 1 && map[position.x][position.y + i] == Cell::PLAYER2)
 				{
 					_score += KILL_PLAYER_SCORE;
 				}
-				else if (playerID == 1 && map.map[position.x][position.y + i] == Cell::BLOCK)
+				else if (playerID == 1 && map[position.x][position.y + i] == Cell::BLOCK)
 				{
 					_score += DESTROY_BLOCK_SCORE;
 				}
-				else if (playerID == 2 && map.map[position.x][position.y + i] == Cell::PLAYER1)
+				else if (playerID == 2 && map[position.x][position.y + i] == Cell::PLAYER1)
 				{
 					_score += KILL_PLAYER_SCORE;
 				}
-				else if (playerID == 2 && map.map[position.x][position.y + i] == Cell::BLOCK)
+				else if (playerID == 2 && map[position.x][position.y + i] == Cell::BLOCK)
 				{
 					_score += DESTROY_BLOCK_SCORE;
 				}
-				map.map[position.x][position.y + i] = Cell::EXPLOSION;
+				map[position.x][position.y + i] = Cell::EXPLOSION;
 			}
 		}
 		///LEFT CELLS
 		for (int i = 1; i <= BOMB_RANGE; i++)
 		{
-			if (map.map[position.x - i][position.y] != Cell::WALL)
+			if (map[position.x - i][position.y] != Cell::WALL)
 			{
-				if (playerID == 1 && map.map[position.x - i][position.y ] == Cell::PLAYER2)
+				if (playerID == 1 && map[position.x - i][position.y ] == Cell::PLAYER2)
 				{
 					_score += KILL_PLAYER_SCORE;
 				}
-				else if (playerID == 1 && map.map[position.x - i][position.y ] == Cell::BLOCK)
+				else if (playerID == 1 && map[position.x - i][position.y ] == Cell::BLOCK)
 				{
 					_score += DESTROY_BLOCK_SCORE;
 				}
-				else if (playerID == 2 && map.map[position.x - i][position.y] == Cell::PLAYER1)
+				else if (playerID == 2 && map[position.x - i][position.y] == Cell::PLAYER1)
 				{
 					_score += KILL_PLAYER_SCORE;
 				}
-				else if (playerID == 2 && map.map[position.x - i][position.y] == Cell::BLOCK)
+				else if (playerID == 2 && map[position.x - i][position.y] == Cell::BLOCK)
 				{
 					_score += DESTROY_BLOCK_SCORE;
 				}
-				map.map[position.x - i][position.y] = Cell::EXPLOSION;
+				map[position.x - i][position.y] = Cell::EXPLOSION;
 			}
 		}
 		///RIGHT CELLS
 		for (int i = 1; i <= BOMB_RANGE; i++)
 		{
-			if (map.map[position.x + i][position.y] != Cell::WALL)
+			if (map[position.x + i][position.y] != Cell::WALL)
 			{
-				if (playerID == 1 && map.map[position.x + i][position.y] == Cell::PLAYER2)
+				if (playerID == 1 && map[position.x + i][position.y] == Cell::PLAYER2)
 				{
 					_score += KILL_PLAYER_SCORE;
 				}
-				else if (playerID == 1 && map.map[position.x + i][position.y] == Cell::BLOCK)
+				else if (playerID == 1 && map[position.x + i][position.y] == Cell::BLOCK)
 				{
 					_score += DESTROY_BLOCK_SCORE;
 				}
-				else if (playerID == 2 && map.map[position.x + i][position.y] == Cell::PLAYER1)
+				else if (playerID == 2 && map[position.x + i][position.y] == Cell::PLAYER1)
 				{
 					_score += KILL_PLAYER_SCORE;
 				}
-				else if (playerID == 2 && map.map[position.x + i][position.y] == Cell::BLOCK)
+				else if (playerID == 2 && map[position.x + i][position.y] == Cell::BLOCK)
 				{
 					_score += DESTROY_BLOCK_SCORE;
 				}
-				map.map[position.x + i][position.y] = Cell::EXPLOSION;
+				map[position.x + i][position.y] = Cell::EXPLOSION;
 			}
 		}
 	}
@@ -166,46 +166,46 @@ void Bombs::IsExploding(Map &map, int &_score)
 		EndedExplosion(map);
 }
 
-void Bombs::SetBombs(Player player)
+void Bombs::SetBombs(const Vec2 &playerPos)
 {
 	isSet = true;
 	startTime = clock();
-	position = player.pos;
+	position = playerPos;
 }
 
-void Bombs::EndedExplosion(Map &map)
+void Bombs::EndedExplosion(std::vector<std::vector<Cell>> &map)
 {
 	//Funcion sirve para volver a poner las Cells como NONE una vez han explotado
 	///UP CELLS
 	for (int i = 1; i <= BOMB_RANGE; i++)
 	{
-		if (map.map[position.x][position.y - i] == Cell::EXPLOSION)
+		if (map[position.x][position.y - i] == Cell::EXPLOSION)
 		{
-			map.map[position.x][position.y - i] = Cell::NONE;
+			map[position.x][position.y - i] = Cell::NONE;
 		}
 	}
 	///DOWN CELLS
 	for (int i = 1; i <= BOMB_RANGE; i++)
 	{
-		if (map.map[position.x][position.y + i] == Cell::EXPLOSION)
+		if (map[position.x][position.y + i] == Cell::EXPLOSION)
 		{
-			map.map[position.x][position.y + i] = Cell::NONE;
+			map[position.x][position.y + i] = Cell::NONE;
 		}
 	}
 	///LEFT CELLS
 	for (int i = 1; i <= BOMB_RANGE; i++)
 	{
-		if (map.map[position.x - i][position.y] == Cell::EXPLOSION)
+		if (map[position.x - i][position.y] == Cell::EXPLOSION)
 		{
-			map.map[position.x - i][position.y] = Cell::NONE;
+			map[position.x - i][position.y] = Cell::NONE;
 		}
 	}
 	///RIGHT CELLS
 	for (int i = 1; i <= BOMB_RANGE; i++)
 	{
-		if (map.map[position.x + i][position.y] == Cell::EXPLOSION)
+		if (map[position.x + i][position.y] == Cell::EXPLOSION)
 		{
-			map.map[position.x + i][position.y] = Cell::NONE;
+			map[position.x + i][position.y] = Cell::NONE;
 		}
 	}
 }

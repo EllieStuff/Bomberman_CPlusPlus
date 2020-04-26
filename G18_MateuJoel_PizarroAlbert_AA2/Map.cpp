@@ -1,7 +1,5 @@
 #include "Map.h"
-#include <fstream>
-#include <iostream>
-#include <Windows.h>
+
 
 
 void Map::ReadConfigTXT(Player &player1, Player &player2)
@@ -60,6 +58,14 @@ void Map::Refresh(Player & player1, Player & player2, InputManager inputManager)
 {
 	bool *inputs = inputManager.GetKeys();
 	bool hasReadP1, hasReadP2 = hasReadP1 = false;
+	if (player1.bomb.isSet)
+	{
+		player1.bomb.IsExploding(map, player1.score);
+	}
+	else if (player2.bomb.isSet)
+	{
+		player2.bomb.IsExploding(map, player2.score);
+	}
 	for (int i = 0; i < static_cast<int>(Inputs::COUNT); i++) {
 		if (inputs[i]) {
 			Inputs input = static_cast<Inputs>(i);
@@ -70,8 +76,8 @@ void Map::Refresh(Player & player1, Player & player2, InputManager inputManager)
 						map[player1.pos.y][player1.pos.x] = Cell::NONE;
 						player1.Move(input);
 						map[player1.pos.y][player1.pos.x] = Cell::PLAYER1;
-					}
 					hasReadP1 = true;
+					}
 				}
 				break;
 
@@ -168,6 +174,14 @@ void Map::PrintMap() const
 					break;
 				case Cell::NONE:
 					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+					std::cout << static_cast<char>(map[i][j]) << ' ';
+					break;
+				case Cell::BOMB:
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 68);
+					std::cout << static_cast<char>(map[i][j]) << ' ';
+					break;
+				case Cell::EXPLOSION:
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 102);
 					std::cout << static_cast<char>(map[i][j]) << ' ';
 					break;
 				default:

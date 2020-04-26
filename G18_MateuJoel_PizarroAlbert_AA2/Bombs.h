@@ -1,25 +1,26 @@
 #pragma once
-#include "Types.h"
-#include "Constants.h"
-#include "Map.h"
+#include <vector>
 #include <time.h>
+#include "Constants.h"
+#include "Types.h"
 
 class Bombs
 {
 private:
-	bool hasExploded;
-	bool isSet;
+	bool hasExploded = false;
 	clock_t startTime;
 	int playerID;
 
 public:
+	bool isSet = false;
 	Vec2 position;
 	//Constructor
+	Bombs() {};
 	Bombs(const int &_id);
 	//Methods
-	void IsExploding(Map &map, int &_score);
+	void IsExploding(std::vector<std::vector<Cell>> &map, int &_score);
 
-	void EndedExplosion(Map &map);
+	void EndedExplosion(std::vector<std::vector<Cell>> &map);
 
-	void SetBombs(Player player);
+	void SetBombs(const Vec2 &playerPos);
 };

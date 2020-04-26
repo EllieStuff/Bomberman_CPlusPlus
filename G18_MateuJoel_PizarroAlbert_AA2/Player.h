@@ -1,7 +1,5 @@
 #pragma once
-#include "Types.h"
 #include "InputManager.h"
-#include <iostream>
 #include "Bombs.h"
 
 struct Player {
@@ -25,6 +23,8 @@ public:
 	void AddScore(const int &scoreAdded);
 
 	void Move(const Inputs &input);
+
+	void PutBomb();
 
 	//void PrintPlayer();
 

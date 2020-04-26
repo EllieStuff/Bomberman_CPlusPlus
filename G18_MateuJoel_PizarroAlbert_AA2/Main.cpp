@@ -1,11 +1,6 @@
 //Main.cpp
-#include "InputManager.h"
-#include "Player.h"
 #include "Map.h"
-#include "Constants.h"
 #include "Utils.h"
-#include <Windows.h>
-#include <time.h>
 
 
 

@@ -46,12 +46,21 @@ void Player::Move(const Inputs & input)
 	case Inputs::RIGHT_1: case Inputs::RIGHT_2:
 		pos.x++;
 		break;
-
+	case Inputs::BOMB_1: case Inputs::BOMB_2:
+		PutBomb();
+		break;
 	default:;
 
 	}
 }
 
+void Player::PutBomb()
+{
+	if (!bomb.isSet)
+	{
+		bomb.SetBombs(pos);
+	}
+}
 
 //void Player::PrintPlayer()
 //{
