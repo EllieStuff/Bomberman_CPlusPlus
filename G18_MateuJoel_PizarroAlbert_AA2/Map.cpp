@@ -188,6 +188,10 @@ bool Map::CollisionWithExplosion(Player &player)
 		player.hit = true;
 		player.lives--;
 		player.ReInitPos();
+		if (player.id == 1)
+			map[player.pos.y][player.pos.x] = Cell::PLAYER1;
+		else if (player.id == 2)
+			map[player.pos.y][player.pos.x] = Cell::PLAYER2;
 		/*if (player.lives <= 0)
 			GameState::GAME_OVER;*/
 		
