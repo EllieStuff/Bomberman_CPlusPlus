@@ -78,7 +78,8 @@ void Map::Refresh(Player & player1, Player & player2, InputManager inputManager)
 		map[player2.bomb.position.y][player2.bomb.position.x] = Cell::BOMB;
 		player2.bomb.IsExploding(map, player2.score);
 	}
-
+	CollisionWithExplosion(player1);
+	CollisionWithExplosion(player2);
 
 	/*bool *inputs = inputManager.GetKeys();
 	bool hasReadP1, hasReadP2 = hasReadP1 = false;
@@ -181,15 +182,16 @@ bool Map::MoveAvailable(Player player, InputManager inputManager)
 bool Map::CollisionWithExplosion(Player &player)
 {
 	if (map[player.pos.y][player.pos.x] != Cell::EXPLOSION)
-		return true;
+		return false;
 	else
 	{
 		player.hit = true;
 		player.lives--;
+		player.ReInitPos();
 		/*if (player.lives <= 0)
-			player.ReinitPos();
-			GAMEOVER;
-		*/
+			GameState::GAME_OVER;*/
+		
+		return true;
 	}
 }
 

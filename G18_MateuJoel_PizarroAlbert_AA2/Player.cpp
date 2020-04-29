@@ -24,6 +24,11 @@ void Player::InitPos(const Vec2 & _pos)
 	initialPos = pos = _pos;
 }
 
+void Player::ReInitPos()
+{
+	pos = initialPos;
+}
+
 void Player::AddScore(const int & scoreAdded)
 {
 	score += scoreAdded;

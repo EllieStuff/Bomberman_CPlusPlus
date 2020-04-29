@@ -12,11 +12,11 @@ void Bombs::IsExploding(std::vector<std::vector<Cell>> &map, int &_score)
 			Cell currentCell = map[position.y - i][position.x];
 			if (currentCell != Cell::BLOCK)
 			{
-				if (playerID == 1 && currentCell == Cell::PLAYER2)
+				if (playerID == 1 && currentCell == Cell::PLAYER2)	//no cuentan suicidios
 				{
 					_score += KILL_PLAYER_SCORE;
 				}
-				else if (playerID == 2 && currentCell == Cell::PLAYER1)
+				else if (playerID == 2 && currentCell == Cell::PLAYER1)		
 				{
 					_score += KILL_PLAYER_SCORE;
 				}
@@ -102,6 +102,21 @@ void Bombs::IsExploding(std::vector<std::vector<Cell>> &map, int &_score)
 				break;
 			}
 		}
+		///CENTER CELLS
+		Cell currentCell = map[position.y][position.x];
+		if (currentCell != Cell::BLOCK)
+		{
+			if (playerID == 1 && currentCell == Cell::PLAYER2)
+			{
+				_score += KILL_PLAYER_SCORE;
+			}
+			else if (playerID == 2 && currentCell == Cell::PLAYER1)
+			{
+				_score += KILL_PLAYER_SCORE;
+			}
+			//No se puede poner bomba en el muro por lo tanto no se mira para puntuar por muro
+			map[position.y][position.x] = Cell::EXPLOSION;
+		}
 	}
 	else if (hasExploded) {
 		EndedExplosion(map);
@@ -170,6 +185,7 @@ void Bombs::EndedExplosion(std::vector<std::vector<Cell>> &map)
 		}
 	}
 	///CENTER CELL
-	if (map[position.y][position.x] == Cell::BOMB)
+	if (map[position.y][position.x] == Cell::EXPLOSION ||
+		map[position.y][position.x] == Cell::BOMB)
 		map[position.y][position.x] = Cell::NONE;
 }

@@ -5,7 +5,6 @@
 struct Player {
 private:
 	Vec2 initialPos;
-
 public:
 	Vec2 pos;
 	int id = 0;
@@ -19,6 +18,8 @@ public:
 	Player(const Player &p);
 
 	void InitPos(const Vec2 &_pos);
+
+	void ReInitPos();
 
 	void AddScore(const int &scoreAdded);
 
