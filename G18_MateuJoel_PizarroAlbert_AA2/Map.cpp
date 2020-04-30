@@ -9,10 +9,10 @@ void Map::ReadConfigTXT(Player &player1, Player &player2)
 	std::ifstream file("config.txt");
 	if (file.is_open())
 	{
-		file >> std::noskipws;
 		file >> numRows;
 		file >> aux;
 		file >> numColumns;
+		file >> std::noskipws;
 		file >> aux;
 		//map = new Cell *[numColumns];
 		map = std::vector<std::vector<Cell>>(numRows);
