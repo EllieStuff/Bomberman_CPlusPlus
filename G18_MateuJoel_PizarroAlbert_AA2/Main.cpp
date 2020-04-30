@@ -40,7 +40,7 @@ int main() {
 			inputManager.Update();
 
 			//Update
-			map.Refresh(player1, player2, inputManager);
+			map.Refresh(player1, player2, gameState, inputManager);
 			if (inputManager.GetKey(Inputs::PAUSE)) {
 				//Fer gestió de les variables necessaries (recordar parar temps a tot)
 				gameState = GameState::PAUSE;

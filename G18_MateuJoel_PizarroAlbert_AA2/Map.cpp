@@ -54,7 +54,7 @@ void Map::ReadConfigTXT(Player &player1, Player &player2)
 	}
 }
 
-void Map::Refresh(Player & player1, Player & player2, InputManager inputManager)
+void Map::Refresh(Player & player1, Player & player2, GameState &gameState, InputManager inputManager)
 {
 
 	if (MoveAvailable(player1, inputManager)) {
@@ -78,8 +78,8 @@ void Map::Refresh(Player & player1, Player & player2, InputManager inputManager)
 		map[player2.bomb.position.y][player2.bomb.position.x] = Cell::BOMB;
 		player2.bomb.IsExploding(map, player2.score);
 	}
-	CollisionWithExplosion(player1);
-	CollisionWithExplosion(player2);
+	CollisionWithExplosion(player1, gameState);
+	CollisionWithExplosion(player2, gameState);
 
 	/*bool *inputs = inputManager.GetKeys();
 	bool hasReadP1, hasReadP2 = hasReadP1 = false;
@@ -179,7 +179,7 @@ bool Map::MoveAvailable(Player player, InputManager inputManager)
 	return false;
 }
 
-bool Map::CollisionWithExplosion(Player &player)
+bool Map::CollisionWithExplosion(Player &player, GameState &gameState)
 {
 	if (map[player.pos.y][player.pos.x] != Cell::EXPLOSION)
 		return false;
@@ -192,8 +192,8 @@ bool Map::CollisionWithExplosion(Player &player)
 			map[player.pos.y][player.pos.x] = Cell::PLAYER1;
 		else if (player.id == 2)
 			map[player.pos.y][player.pos.x] = Cell::PLAYER2;
-		/*if (player.lives <= 0)
-			GameState::GAME_OVER;*/
+		if (player.lives <= 0)
+			gameState = GameState::GAME_OVER;
 		
 		return true;
 	}
